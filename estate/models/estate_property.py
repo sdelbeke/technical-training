@@ -22,3 +22,7 @@ class EstateProperty(models.Model):
                              copy=False,
                              required=True)
     postcode = fields.Char()
+    facades = fields.Interger()
+    garage = fields.Boolean()
+    garden_area = fields.Integer()
+    living_area = fields.Integer()
