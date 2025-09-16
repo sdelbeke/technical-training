@@ -60,20 +60,18 @@
         <field name="name">estate.property.search<field/>
         <field name="model">estate.property<field/>
         <field name="arch" type="xml">
-            <search string="Tests">
-                <field name="name"/>
+            <search string="search">
+                <field name="name" string="Title"/>
                 <field name="postcode"/>
                 <field name="expected_price"/>
                 <field name="bedrooms"/>
                 <field name="facades"/>
-               <separator/>
+                <separator/>
                 <filter string="Available" name="available" />
                 <filter sting="Postcode" name="postcode" />
             </search>
         </field>
-
     </record>
-
 
     <record id="estate_property_action" model="ir.actions.act_window">
         <field name="name">Estate property action</field>
