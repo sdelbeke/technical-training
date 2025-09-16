@@ -53,6 +53,14 @@
                                 </group>
                             </group>
                         </page>
+                        <page string="Other info">
+                            <group>
+                                <group>
+                                    <field name="salesperson_id" string="Sales person"/>
+                                    <field name="buyer_id" string="Buyer"/>
+                                </group>
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
             </form>

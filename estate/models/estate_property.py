@@ -27,3 +27,5 @@ class EstateProperty(models.Model):
     garden_area = fields.Integer()
     living_area = fields.Integer()
     property_type_id = fields.Many2one("estate.property.type", string="Property type")
+    salesperson_id = fields.Many2one("res.users", default=lambda self: self.env.user)
+    buyer_id = fields.Many2one("res.partner", copy=False)
