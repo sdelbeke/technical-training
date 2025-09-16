@@ -26,4 +26,4 @@ class EstateProperty(models.Model):
     garage = fields.Boolean()
     garden_area = fields.Integer()
     living_area = fields.Integer()
-    type_id = fields.Many2one("estate.property.type", string="Type")
+    property_type_id = fields.Many2one("estate.property.type", string="Property type")
