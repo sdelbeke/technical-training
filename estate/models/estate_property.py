@@ -21,3 +21,4 @@ class EstateProperty(models.Model):
                              default="new",
                              copy=False,
                              required=True)
+    postcode = fields.Char()
