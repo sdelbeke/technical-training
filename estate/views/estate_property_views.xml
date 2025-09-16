@@ -10,7 +10,7 @@
                 <field name="bedrooms"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
-                <field name="data_availability"/>
+                <field name="date_availability"/>
             </list>
         </field>
     </record>
