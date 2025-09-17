@@ -1,7 +1,7 @@
 from email.policy import default
 
-from odoo import fields, models, api
-
+from odoo import fields, models, api, _
+from odoo.exceptions import UserError
 
 class EstateProperty(models.Model):
     _name = "estate.property"
@@ -56,3 +56,14 @@ class EstateProperty(models.Model):
         else:
             self.garden_area = 0
             self.garden_orientation = False
+
+
+    def action_cancel_property(self):
+        for property in self:
+            property.state = "cancelled"
+
+    def action_sell_property(self):
+        for property in self:
+            if property.state == "cancelled":
+                raise UserError(_("Cancelled properties cannot be sold"))
+            property.state = "sold"
