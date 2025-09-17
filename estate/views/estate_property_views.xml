@@ -4,10 +4,11 @@
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list string="estate list">
+            <list string="estate list" decoration-success="offer_ids">
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="bedrooms"/>
+                  <field name="tag_ids" widget="many2many_tags"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
                 <field name="date_availability"/>
@@ -22,6 +23,7 @@
                 <header>
                   <button name="action_cancel_property" type="object" string="Cancel"/>
                   <button name="action_sell_property" type="object" string="Sold"/>
+                  <field name="state" widget="statusbar"/>
                  </header>
                 <sheet>
                     <div class="oe_title">
@@ -55,16 +57,16 @@
                                     <field name="facades"/>
                                     <field name="garage" />
                                     <field name="garden" />
-                                    <field name="garden_orientation" />
+                                    <field name="garden_orientation" invisible="not garden"/>
                                     <field name="living_area"/>
-                                    <field name="garden_area"/>
+                                    <field name="garden_area" invisible="not garden"/>
                                     <field name="total_area"/>
                                 </group>
                             </group>
                         </page>
                         <page string="Offers">
-                            <field name="offer_ids">
-                                <list>
+                            <field name="offer_ids" readonly="state in ['accepted','sold','cancelled']">
+                                <list editable="top">
                                     <field name="price" />
                                     <field name="status" />
                                     <field name="partner_id" />
