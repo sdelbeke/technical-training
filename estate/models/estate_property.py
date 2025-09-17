@@ -1,7 +1,8 @@
 from email.policy import default
 
 from odoo import fields, models, api, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools import float_is_zero, float_compare
 
 class EstateProperty(models.Model):
     _name = "estate.property"
@@ -34,6 +35,12 @@ class EstateProperty(models.Model):
     best_price = fields.Float(compute="_compute_best_price")
     total_area = fields.Integer(compute="_compute_total_area")
 
+    _sql_constraints = [
+        ("check_expected_price", "CHECK(expected_price > 0)",
+         'The expected price must be strictly positive'),
+        ("check_selling_price", "CHECK(selling_price >= 0)",
+        'The selling price must be positive'),
+    ]
 
     @api.depends('offer_ids.price')
     def _compute_best_price(self):
@@ -67,3 +74,12 @@ class EstateProperty(models.Model):
             if property.state == "cancelled":
                 raise UserError(_("Cancelled properties cannot be sold"))
             property.state = "sold"
+
+
+    @api.constrains('selling_price','expected_price')
+    def _check_selling_price(self):
+        for property in self:
+            if (not float_is_zero(property.selling_price, precision_rounding = 0.01) and
+                float_compare(property.selling_price, 0.9 * property.expected_price, precision_rounding=0.01) < 0
+            ):
+                raise ValidationError(_(''))
