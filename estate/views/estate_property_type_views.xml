@@ -16,11 +16,18 @@
         <field name="arch" type="xml">
             <form string="properties list">
                 <sheet>
-                    <div class="oe_title">
+                        <!--
+                    <header>
+                        <button type="action" name="estate.property_offer_model_action" icon="fa-money" class="oe_stat_button">
+                            <field name="offer_count" widget="statinfo" string=""/>
+                            <h5>Offers</h5>
+                        </button>
+                    </header>  -->
+                    <group>
                         <h1>
                             <field name="name" />
                         </h1>
-                    </div>
+                    </group>
                     <notebook>
                         <page>
                             <field name="property_ids">

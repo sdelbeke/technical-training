@@ -4,13 +4,14 @@
         <field name="name">estate.property.list</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <list string="estate list" decoration-success="offer_ids">
+            <list string="estate list" decoration-success="offer_ids" decoration-bf="state == 'offer_accepted'" decoration-muted="state == 'sold'">
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="bedrooms"/>
                   <field name="tag_ids" widget="many2many_tags"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
+                <field name="property_type_id"/>
                 <field name="date_availability" optional="hide"/>
             </list>
         </field>
@@ -39,8 +40,8 @@
         <field name="arch" type="xml">
             <form string="estate form">
                 <header>
-                  <button name="action_cancel_property" type="object" string="Cancel"/>
-                  <button name="action_sell_property" type="object" string="Sold"/>
+                  <button name="action_cancel_property" type="object" string="Cancel" invisible="state in ['sold','cancelled']"/>
+                  <button name="action_sell_property" type="object" string="Sold"  invisible="state in ['sold','cancelled']"/>
                   <field name="state" widget="statusbar"/>
                  </header>
                 <sheet>
